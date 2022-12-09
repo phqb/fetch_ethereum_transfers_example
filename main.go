@@ -38,7 +38,7 @@ func fetchERC20TransferEvents() {
 			fmt.Printf("could not parse transfer event, error: %s\n", err)
 			continue
 		}
-		fmt.Printf("ERC20 Transfer from=%s to=%s amount=%s\n", transferEvent.From, transferEvent.To, transferEvent.Value)
+		fmt.Printf("ERC20 Transfer from=%s to=%s token=%s amount=%s\n", transferEvent.From, transferEvent.To, transferEvent.Raw.Address, transferEvent.Value)
 	}
 }
 
@@ -128,7 +128,6 @@ func fetchNativeTransfers() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(string(body))
 	var result traceBlockByHashResultJSON
 	err = json.Unmarshal(body, &result)
 	if err != nil {
